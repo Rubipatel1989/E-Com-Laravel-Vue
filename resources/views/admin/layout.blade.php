@@ -24,11 +24,11 @@
 					<div class="top-menu ms-auto">
 						<ul class="navbar-nav align-items-center">
 							<li class="nav-item mobile-search-icon">
-								<a class="nav-link" href="#">	<i class='bx bx-search'></i>
+								<a class="nav-link" href="#"> <i class='bx bx-search'></i>
 								</a>
 							</li>
 							<li class="nav-item dropdown dropdown-large">
-								<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">	<i class='bx bx-category'></i>
+								<a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <i class='bx bx-category'></i>
 								</a>
 								<div class="dropdown-menu dropdown-menu-end">
 									<div class="row row-cols-3 g-3 p-3">
@@ -83,7 +83,7 @@
 												</div>
 												<div class="flex-grow-1">
 													<h6 class="msg-name">New Customers<span class="msg-time float-end">14 Sec
-												ago</span></h6>
+															ago</span></h6>
 													<p class="msg-info">5 new user registered</p>
 												</div>
 											</div>
@@ -94,7 +94,7 @@
 												</div>
 												<div class="flex-grow-1">
 													<h6 class="msg-name">New Orders <span class="msg-time float-end">2 min
-												ago</span></h6>
+															ago</span></h6>
 													<p class="msg-info">You have recived new orders</p>
 												</div>
 											</div>
@@ -105,7 +105,7 @@
 												</div>
 												<div class="flex-grow-1">
 													<h6 class="msg-name">24 PDF File<span class="msg-time float-end">19 min
-												ago</span></h6>
+															ago</span></h6>
 													<p class="msg-info">The pdf files generated</p>
 												</div>
 											</div>
@@ -116,7 +116,7 @@
 												</div>
 												<div class="flex-grow-1">
 													<h6 class="msg-name">Time Response <span class="msg-time float-end">28 min
-												ago</span></h6>
+															ago</span></h6>
 													<p class="msg-info">5.1 min avarage time response</p>
 												</div>
 											</div>
@@ -127,7 +127,7 @@
 												</div>
 												<div class="flex-grow-1">
 													<h6 class="msg-name">New Product Approved <span
-												class="msg-time float-end">2 hrs ago</span></h6>
+															class="msg-time float-end">2 hrs ago</span></h6>
 													<p class="msg-info">Your new product has approved</p>
 												</div>
 											</div>
@@ -138,7 +138,7 @@
 												</div>
 												<div class="flex-grow-1">
 													<h6 class="msg-name">New Comments <span class="msg-time float-end">4 hrs
-												ago</span></h6>
+															ago</span></h6>
 													<p class="msg-info">New customer comments recived</p>
 												</div>
 											</div>
@@ -149,7 +149,7 @@
 												</div>
 												<div class="flex-grow-1">
 													<h6 class="msg-name">Your item is shipped <span class="msg-time float-end">5 hrs
-												ago</span></h6>
+															ago</span></h6>
 													<p class="msg-info">Successfully shipped your item</p>
 												</div>
 											</div>
@@ -160,7 +160,7 @@
 												</div>
 												<div class="flex-grow-1">
 													<h6 class="msg-name">New 24 authors<span class="msg-time float-end">1 day
-												ago</span></h6>
+															ago</span></h6>
 													<p class="msg-info">24 new authors joined last week</p>
 												</div>
 											</div>
@@ -171,7 +171,7 @@
 												</div>
 												<div class="flex-grow-1">
 													<h6 class="msg-name">Defense Alerts <span class="msg-time float-end">2 weeks
-												ago</span></h6>
+															ago</span></h6>
 													<p class="msg-info">45% less alerts last 4 weeks</p>
 												</div>
 											</div>
@@ -201,7 +201,7 @@
 												</div>
 												<div class="flex-grow-1">
 													<h6 class="msg-name">Daisy Anderson <span class="msg-time float-end">5 sec
-												ago</span></h6>
+															ago</span></h6>
 													<p class="msg-info">The standard chunk of lorem</p>
 												</div>
 											</div>
@@ -213,7 +213,7 @@
 												</div>
 												<div class="flex-grow-1">
 													<h6 class="msg-name">Althea Cabardo <span class="msg-time float-end">14
-												sec ago</span></h6>
+															sec ago</span></h6>
 													<p class="msg-info">Many desktop publishing packages</p>
 												</div>
 											</div>
@@ -225,7 +225,7 @@
 												</div>
 												<div class="flex-grow-1">
 													<h6 class="msg-name">Oscar Garner <span class="msg-time float-end">8 min
-												ago</span></h6>
+															ago</span></h6>
 													<p class="msg-info">Various versions have evolved over</p>
 												</div>
 											</div>
@@ -237,7 +237,7 @@
 												</div>
 												<div class="flex-grow-1">
 													<h6 class="msg-name">Katherine Pechon <span class="msg-time float-end">15
-												min ago</span></h6>
+															min ago</span></h6>
 													<p class="msg-info">Making this the first true generator</p>
 												</div>
 											</div>
@@ -249,7 +249,7 @@
 												</div>
 												<div class="flex-grow-1">
 													<h6 class="msg-name">Amelia Doe <span class="msg-time float-end">22 min
-												ago</span></h6>
+															ago</span></h6>
 													<p class="msg-info">Duis aute irure dolor in reprehenderit</p>
 												</div>
 											</div>
@@ -261,7 +261,7 @@
 												</div>
 												<div class="flex-grow-1">
 													<h6 class="msg-name">Cristina Jhons <span class="msg-time float-end">2 hrs
-												ago</span></h6>
+															ago</span></h6>
 													<p class="msg-info">The passage is attributed to an unknown</p>
 												</div>
 											</div>
@@ -273,7 +273,7 @@
 												</div>
 												<div class="flex-grow-1">
 													<h6 class="msg-name">James Caviness <span class="msg-time float-end">4 hrs
-												ago</span></h6>
+															ago</span></h6>
 													<p class="msg-info">The point of using Lorem</p>
 												</div>
 											</div>
@@ -285,7 +285,7 @@
 												</div>
 												<div class="flex-grow-1">
 													<h6 class="msg-name">Peter Costanzo <span class="msg-time float-end">6 hrs
-												ago</span></h6>
+															ago</span></h6>
 													<p class="msg-info">It was popularised in the 1960s</p>
 												</div>
 											</div>
@@ -297,7 +297,7 @@
 												</div>
 												<div class="flex-grow-1">
 													<h6 class="msg-name">David Buckley <span class="msg-time float-end">2 hrs
-												ago</span></h6>
+															ago</span></h6>
 													<p class="msg-info">Various versions have evolved over</p>
 												</div>
 											</div>
@@ -309,7 +309,7 @@
 												</div>
 												<div class="flex-grow-1">
 													<h6 class="msg-name">Thomas Wheeler <span class="msg-time float-end">2 days
-												ago</span></h6>
+															ago</span></h6>
 													<p class="msg-info">If you are going to use a passage</p>
 												</div>
 											</div>
@@ -321,7 +321,7 @@
 												</div>
 												<div class="flex-grow-1">
 													<h6 class="msg-name">Johnny Seitz <span class="msg-time float-end">5 days
-												ago</span></h6>
+															ago</span></h6>
 													<p class="msg-info">All the Lorem Ipsum generators</p>
 												</div>
 											</div>
@@ -356,7 +356,7 @@
 							<li>
 								<div class="dropdown-divider mb-0"></div>
 							</li>
-							<li><a class="dropdown-item" href="javascript:;"><i class='bx bx-log-out-circle'></i><span>Logout</span></a>
+							<li><a class="dropdown-item" href="{{ url('logout') }}"><i class='bx bx-log-out-circle'></i><span>Logout</span></a>
 							</li>
 						</ul>
 					</div>
@@ -364,8 +364,8 @@
 			</div>
 		</header>
 		<!--end header -->
-              @yield('content')
-              <!--start switcher-->
+		@yield('content')
+		<!--start switcher-->
 		<div class="switcher-wrapper">
 			<div class="switcher-btn"> <i class='bx bx-cog bx-spin'></i>
 			</div>
@@ -374,9 +374,9 @@
 					<h5 class="mb-0 text-uppercase">Theme Customizer</h5>
 					<button type="button" class="btn-close ms-auto close-switcher" aria-label="Close"></button>
 				</div>
-				<hr/>
+				<hr />
 				<h6 class="mb-0">Theme Styles</h6>
-				<hr/>
+				<hr />
 				<div class="d-flex align-items-center justify-content-between">
 					<div class="form-check">
 						<input class="form-check-input" type="radio" name="flexRadioDefault" id="lightmode" checked>
@@ -391,14 +391,14 @@
 						<label class="form-check-label" for="semidark">Semi Dark</label>
 					</div>
 				</div>
-				<hr/>
+				<hr />
 				<div class="form-check">
 					<input class="form-check-input" type="radio" id="minimaltheme" name="flexRadioDefault">
 					<label class="form-check-label" for="minimaltheme">Minimal Theme</label>
 				</div>
-				<hr/>
+				<hr />
 				<h6 class="mb-0">Header Colors</h6>
-				<hr/>
+				<hr />
 				<div class="header-colors-indigators">
 					<div class="row row-cols-auto g-3">
 						<div class="col">
@@ -427,9 +427,9 @@
 						</div>
 					</div>
 				</div>
-				<hr/>
+				<hr />
 				<h6 class="mb-0">Sidebar Colors</h6>
-				<hr/>
+				<hr />
 				<div class="header-colors-indigators">
 					<div class="row row-cols-auto g-3">
 						<div class="col">
@@ -462,8 +462,8 @@
 		</div>
 		<!--end switcher-->
 	</div>
-	
-       <x-admin-footer-js></x-admin-footer-js>
+
+	<x-admin-footer-js></x-admin-footer-js>
 </body>
 
 </html>

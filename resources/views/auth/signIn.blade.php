@@ -32,15 +32,16 @@
                                                                       <hr />
                                                                </div>
                                                                <div class="form-body">
-                                                                      <form class="row g-3">
+                                                                      <form class="row g-3" id="formSubmit">
+                                                                             @csrf`
                                                                              <div class="col-12">
                                                                                     <label for="inputEmailAddress" class="form-label">Email Address</label>
-                                                                                    <input type="email" class="form-control" id="inputEmailAddress" placeholder="Email Address">
+                                                                                    <input type="email" name="email" class="form-control" required id="inputEmailAddress" placeholder="Email Address">
                                                                              </div>
                                                                              <div class="col-12">
                                                                                     <label for="inputChoosePassword" class="form-label">Enter Password</label>
                                                                                     <div class="input-group" id="show_hide_password">
-                                                                                           <input type="password" class="form-control border-end-0" id="inputChoosePassword" value="12345678" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
+                                                                                           <input type="password" name="password" required class="form-control border-end-0" id="inputChoosePassword" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
                                                                                     </div>
                                                                              </div>
                                                                              <div class="col-md-6">
@@ -72,3 +73,26 @@
 </body>
 
 </html>
+
+<script>
+       $('#formSubmit').submit(function(e) {
+              e.preventDefault();
+              if ($(this).parsley().validate()) {
+                     var url = "{{ url('login_user') }}";
+                     $.ajax({
+                            url: url,
+                            data: $('#formSubmit').serialize(),
+                            type: 'post',
+                            success: function(result) {
+                                   if (result.status == 200) {
+                                          window.location.href = result.url;
+                                   } else{
+                                          alert('Wrong credentials');
+                                   }
+                            }
+                     });
+              } else{
+                     alert('Error occurred.');
+              }
+       });
+</script>
