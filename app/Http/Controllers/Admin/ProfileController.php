@@ -38,6 +38,7 @@ class ProfileController extends Controller
             'email' => 'required|string|email|unique:users,email,' . Auth::User()->id,
             'name' => 'required|string|max:200',
             'address' => 'required|string|max:250',
+            'phone' => 'required|string|max:13',
             'twitter_link' => 'string|max:250',
             'fb_link' => 'string|max:250',
             'insta_link' => 'required|string|max:250',
