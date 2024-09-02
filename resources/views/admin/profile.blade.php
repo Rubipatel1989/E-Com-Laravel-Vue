@@ -38,7 +38,7 @@
                                           <div class="card">
                                                  <div class="card-body">
                                                         <div class="d-flex flex-column align-items-center text-center">
-                                                               <img src="assets/images/avatars/avatar-2.png" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+                                                               <img src="{{ url(Auth::user()->image) }}" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
                                                                <div class="mt-3">
                                                                       <h4>{{ Auth::User()->name }}</h4>
                                                                       <p class="text-secondary mb-1">Full Stack Developer</p>
@@ -88,50 +88,86 @@
                                           </div>
                                    </div>
                                    <div class="col-lg-8">
-                                          <div class="card">
-                                                 <div class="card-body">
-                                                        <div class="row mb-3">
-                                                               <div class="col-sm-3">
-                                                                      <h6 class="mb-0">Full Name</h6>
+                                          <form id="formSubmit" action="{{ url('admin/saveProfile') }}" enctype="multipart/form-data">
+                                                 @csrf
+                                                 <div class="card">
+                                                        <div class="card-body">
+                                                               <div class="row mb-3">
+                                                                      <div class="col-sm-3">
+                                                                             <h6 class="mb-0">Full Name</h6>
+                                                                      </div>
+                                                                      <div class="col-sm-9 text-secondary">
+                                                                             <input type="text" required name="name" class="form-control" value="{{ Auth::User()->name }}" />
+                                                                      </div>
                                                                </div>
-                                                               <div class="col-sm-9 text-secondary">
-                                                                      <input type="text" class="form-control" value="{{ Auth::User()->name }}" />
+                                                               <div class="row mb-3">
+                                                                      <div class="col-sm-3">
+                                                                             <h6 class="mb-0">Email</h6>
+                                                                      </div>
+                                                                      <div class="col-sm-9 text-secondary">
+                                                                             <input type="text" required name="email" class="form-control" value="{{ Auth::User()->email }}" />
+                                                                      </div>
                                                                </div>
-                                                        </div>
-                                                        <div class="row mb-3">
-                                                               <div class="col-sm-3">
-                                                                      <h6 class="mb-0">Email</h6>
+                                                               <div class="row mb-3">
+                                                                      <div class="col-sm-3">
+                                                                             <h6 class="mb-0">Phone</h6>
+                                                                      </div>
+                                                                      <div class="col-sm-9 text-secondary">
+                                                                             <input type="text" required name="phone" class="form-control" value="{{ Auth::User()->phone }}" />
+                                                                      </div>
                                                                </div>
-                                                               <div class="col-sm-9 text-secondary">
-                                                                      <input type="text" class="form-control" value="{{ Auth::User()->email }}" />
+
+                                                               <div class="row mb-3">
+                                                                      <div class="col-sm-3">
+                                                                             <h6 class="mb-0">Address</h6>
+                                                                      </div>
+                                                                      <div class="col-sm-9 text-secondary">
+                                                                             <input type="text" required name="address" class="form-control" value="{{ Auth::User()->address }}" />
+                                                                      </div>
                                                                </div>
-                                                        </div>
-                                                        <div class="row mb-3">
-                                                               <div class="col-sm-3">
-                                                                      <h6 class="mb-0">Phone</h6>
+                                                               <div class="row mb-3">
+                                                                      <div class="col-sm-3">
+                                                                             <h6 class="mb-0">Twitter</h6>
+                                                                      </div>
+                                                                      <div class="col-sm-9 text-secondary">
+                                                                             <input type="text" required name="twitter_link" class="form-control" value="{{ Auth::User()->twitter_link }}" />
+                                                                      </div>
                                                                </div>
-                                                               <div class="col-sm-9 text-secondary">
-                                                                      <input type="text" class="form-control" value="{{ Auth::User()->phone }}" />
+                                                               <div class="row mb-3">
+                                                                      <div class="col-sm-3">
+                                                                             <h6 class="mb-0">Facebook</h6>
+                                                                      </div>
+                                                                      <div class="col-sm-9 text-secondary">
+                                                                             <input type="text" required name="fb_link" class="form-control" value="{{ Auth::User()->fb_link }}" />
+                                                                      </div>
                                                                </div>
-                                                        </div>
-                                                        
-                                                        <div class="row mb-3">
-                                                               <div class="col-sm-3">
-                                                                      <h6 class="mb-0">Address</h6>
+                                                               <div class="row mb-3">
+                                                                      <div class="col-sm-3">
+                                                                             <h6 class="mb-0">Insta</h6>
+                                                                      </div>
+                                                                      <div class="col-sm-9 text-secondary">
+                                                                             <input type="text" name="insta_link" class="form-control" value="{{ Auth::User()->insta_link }}" />
+                                                                      </div>
                                                                </div>
-                                                               <div class="col-sm-9 text-secondary">
-                                                                      <input type="text" class="form-control" value="{{ Auth::User()->address }}" />
+                                                               <div class="row mb-3">
+                                                                      <div class="col-sm-3">
+                                                                             <h6 class="mb-0">Image</h6>
+                                                                      </div>
+                                                                      <div class="col-sm-9 text-secondary">
+                                                                             <input type="file" name="image" class="form-control" />
+                                                                      </div>
                                                                </div>
-                                                        </div>
-                                                        <div class="row">
-                                                               <div class="col-sm-3"></div>
-                                                               <div class="col-sm-9 text-secondary">
-                                                                      <input type="button" class="btn btn-primary px-4" value="Save Changes" />
+                                                               <div class="row">
+                                                                      <div class="col-sm-3"></div>
+                                                                      <div class="col-sm-9 text-secondary">
+                                                                             <span id="submitButton">
+                                                                                    <input type="submit" id="submitButton" class="btn btn-primary px-4" value="Save Changes" />
+                                                                             </span>
+                                                                      </div>
                                                                </div>
                                                         </div>
                                                  </div>
-                                          </div>
-                                          
+                                          </form>
                                    </div>
                             </div>
                      </div>

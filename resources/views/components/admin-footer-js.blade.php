@@ -14,22 +14,60 @@
 <script src="{{asset('assets/js/app.js')}}"></script>
 
 <script src="https://developercodez.com/developerCorner/parsley/parsley.min.js"></script>
+<script src="{{asset('snackbar/dist/js-snackbar.js')}}"></script>
 
 
 <!--Password show & hide js -->
 <script>
-$(document).ready(function() {
-       $("#show_hide_password a").on('click', function(event) {
-              event.preventDefault();
-              if ($('#show_hide_password input').attr("type") == "text") {
-                     $('#show_hide_password input').attr('type', 'password');
-                     $('#show_hide_password i').addClass("bx-hide");
-                     $('#show_hide_password i').removeClass("bx-show");
-              } else if ($('#show_hide_password input').attr("type") == "password") {
-                     $('#show_hide_password input').attr('type', 'text');
-                     $('#show_hide_password i').removeClass("bx-hide");
-                     $('#show_hide_password i').addClass("bx-show");
-              }
+       $(document).ready(function() {
+              $("#show_hide_password a").on('click', function(event) {
+                     event.preventDefault();
+                     if ($('#show_hide_password input').attr("type") == "text") {
+                            $('#show_hide_password input').attr('type', 'password');
+                            $('#show_hide_password i').addClass("bx-hide");
+                            $('#show_hide_password i').removeClass("bx-show");
+                     } else if ($('#show_hide_password input').attr("type") == "password") {
+                            $('#show_hide_password input').attr('type', 'text');
+                            $('#show_hide_password i').removeClass("bx-hide");
+                            $('#show_hide_password i').addClass("bx-show");
+                     }
+              });
+
+              $("#formSubmit").on('submit', function(event) {
+                     event.preventDefault();
+                     if ($(this).parsley().validate()) {
+                            var formData = new FormData(this);
+                            var html = '<button class="btn btn-primary" type="button" disabled=""><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Loading ...</button>';
+                            var html1 = '<input type="submit" id="submitButton" class="btn btn-primary px-4">';
+                            $('#submitButton').html(html);
+                            $.ajax({
+                                   type: 'post',
+                                   url: $(this).attr('action'),
+                                   data: formData,
+                                   cache: false,
+                                   contentType: false,
+                                   processData: false,
+                                   success: function(result) {
+                                          if (result.status == 'Success') {
+                                                 showAlert(result.status, result.message);
+                                                 $('#submitButton').html(html1);
+                                          } else {
+                                                 showAlert(result.status, result.message);
+                                                 $('#submitButton').html(html1);
+                                          }
+
+                                   },
+
+                            });
+                     }
+              });
        });
-});
+
+       function showAlert(status, message) {
+              SnackBar({
+                     status: status,
+                     message: message,
+                     position: "br"
+              });
+       }
 </script>
