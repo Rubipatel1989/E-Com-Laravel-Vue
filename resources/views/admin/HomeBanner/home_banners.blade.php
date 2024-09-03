@@ -4,13 +4,13 @@
         <div class="page-content">
                 <!--breadcrumb-->
                 <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                        <div class="breadcrumb-title pe-3">User Profile</div>
+                        <div class="breadcrumb-title pe-3">Home Banner</div>
                         <div class="ps-3">
                                 <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb mb-0 p-0">
                                                 <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                                                 </li>
-                                                <li class="breadcrumb-item active" aria-current="page">User Profilep</li>
+                                                <li class="breadcrumb-item active" aria-current="page">Home Banner</li>
                                         </ol>
                                 </nav>
                         </div>
@@ -27,29 +27,36 @@
                                 </div>
                         </div>
                 </div>
+                <h6 class="mb-0 text-uppercase">Home Banner</h6>
+                <hr />
+                <div class="col">
+                        <button type="button" class="btn btn-outline-info px-5 radius-30">Add Home Banner</button>
+                </div>
                 <div class="card">
                         <div class="card-body">
                                 <div class="table-responsive">
                                         <table id="example2" class="table table-striped table-bordered">
                                                 <thead>
                                                         <tr>
-                                                                <th>Name</th>
-                                                                <th>Position</th>
-                                                                <th>Office</th>
-                                                                <th>Age</th>
-                                                                <th>Start date</th>
-                                                                <th>Salary</th>
+                                                                <th>ID</th>
+                                                                <th>Text</th>
+                                                                <th>Link</th>
+                                                                <th>Image</th>
+                                                                <th>Created</th>
+                                                                <th>Updated</th>
                                                         </tr>
                                                 </thead>
                                                 <tbody>
+                                                        @foreach ($data as $list)
                                                         <tr>
-                                                                <td>Tiger Nixon</td>
-                                                                <td>System Architect</td>
-                                                                <td>Edinburgh</td>
-                                                                <td>61</td>
+                                                                <td>{{ $list->id }}</td>
+                                                                <td>{{ $list->text }}</td>
+                                                                <td>{{ $list->link }}</td>
+                                                                <td>{{ $list->image }}</td>
                                                                 <td>2011/04/25</td>
                                                                 <td>$320,800</td>
                                                         </tr>
+                                                        @endforeach
                                                 </tbody>
                                                 <tfoot>
                                                         <tr>

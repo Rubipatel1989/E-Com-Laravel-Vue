@@ -80,3 +80,4 @@ class createViewFile extends Command
         $this->info("File {$pathname} is created");
     }
 }
+                                                                                                                                                                                                                                                                                                                                                                                                                    
