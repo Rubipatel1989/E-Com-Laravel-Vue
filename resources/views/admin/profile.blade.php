@@ -45,7 +45,7 @@
                                           <div class="card">
                                                  <div class="card-body">
                                                         <div class="d-flex flex-column align-items-center text-center">
-                                                               <img src="{{ url(Auth::user()->image) }}" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+                                                               <img src="{{ url(Auth::user()->image) }}" id="imgPreview" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
                                                                <div class="mt-3">
                                                                       <h4>{{ Auth::User()->name }}</h4>
                                                                       <p class="text-secondary mb-1">Full Stack Developer</p>
@@ -161,7 +161,7 @@
                                                                              <h6 class="mb-0">Image</h6>
                                                                       </div>
                                                                       <div class="col-sm-9 text-secondary">
-                                                                             <input type="file" name="image" class="form-control" />
+                                                                             <input type="file" name="image" id="photo" class="form-control" />
                                                                       </div>
                                                                </div>
                                                                <div class="row">

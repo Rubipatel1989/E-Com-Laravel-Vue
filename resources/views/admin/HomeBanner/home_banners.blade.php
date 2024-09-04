@@ -30,7 +30,7 @@
                 <h6 class="mb-0 text-uppercase">Home Banner</h6>
                 <hr />
                 <div class="col">
-                        <button type="button" class="btn btn-outline-info px-5 radius-30" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Home Banner</button>
+                        <button type="button" onclick="saveData('', '', '', '')" class="btn btn-outline-info px-5 radius-30" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Home Banner</button>
                 </div>
                 <div class="card">
                         <div class="card-body">
@@ -56,7 +56,7 @@
                                                                 <td>{{ $list->image }}</td>
                                                                 <td>{{ $list->created_at }}</td>
                                                                 <td>{{ $list->updated_at }}</td>
-                                                                <td><button type="button" class="btn btn-outline-info px-5 radius-30" data-bs-toggle="modal" data-bs-target="#exampleModal">Update</button></td>
+                                                                <td><button type="button" onclick="saveData('{{$list->id}}', '{{$list->text}}', '{{$list->link}}', '{{$list->image}}')" class="btn btn-outline-info px-5 radius-30" data-bs-toggle="modal" data-bs-target="#exampleModal">Update</button></td>
                                                         </tr>
                                                         @endforeach
                                                 </tbody>
@@ -66,7 +66,7 @@
                                                                 <th>Text</th>
                                                                 <th>Link</th>
                                                                 <th>Image</th>
-                                                                <th>Start date</th>
+                                                                <th>Created</th>
                                                                 <th>Updated</th>
                                                                 <th>Action</th>
                                                         </tr>
@@ -89,37 +89,39 @@
                                 <div class="modal-body">
                                         <div class="border p-4 rounded">
                                                 <div class="card-title d-flex align-items-center">
-                                                        <div><i class="bx bxs-user me-1 font-22 text-info"></i>
-                                                        </div>
+                                                        <!-- <div><i class="bx bxs-user me-1 font-22 text-info"></i>
+                                                        </div> -->
                                                         <!-- <h5 class="mb-0 text-info">User Registration</h5> -->
                                                 </div>
                                                 <hr />
                                                 <div class="row mb-3">
                                                         <label for="enter_text" class="col-sm-3 col-form-label">Enter Your Text</label>
                                                         <div class="col-sm-9">
-                                                                <input type="text" name="text" class="form-control" id="enter_text" placeholder="Enter Your Text">
+                                                                <input type="text" name="text" class="form-control" id="enter_text" placeholder="Enter Your Text" required>
                                                         </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                         <label for="enter_link" class="col-sm-3 col-form-label">Link</label>
                                                         <div class="col-sm-9">
-                                                                <input type="text" name="link" class="form-control" id="enter_link" placeholder="Link">
+                                                                <input type="text" name="link" class="form-control" id="enter_link" placeholder="Link" required>
                                                         </div>
                                                 </div>
                                                 <div class="row mb-3">
                                                         <label for="enter_image" class="col-sm-3 col-form-label">Image</label>
                                                         <div class="col-sm-9">
-                                                                <input type="file" name="image" class="form-control" id="enter_image" placeholder="Image">
+                                                                <input type="file" name="image" class="form-control" id="photo" placeholder="Image" required>
+                                                        </div>
+                                                        <div>
+                                                                <img src="" id="imgPreview" style="height: 200px; width:200px;">
                                                         </div>
                                                 </div>
-
-
                                                 <div class="row">
                                                         <label class="col-sm-3 col-form-label"></label>
                                                         <div class="col-sm-9">
                                                                 <button type="submit" class="btn btn-info px-5">Register</button>
                                                         </div>
                                                 </div>
+                                                <input type="hidden" name="id" id="enter_id">
                                         </div>
                                 </div>
                                 <div class="modal-footer">
@@ -132,3 +134,15 @@
         </div>
 </div>
 @endsection
+
+
+<script>
+        function saveData(id, text, link, image) {
+                $('#enter_id').val(id);
+                $('#enter_text').val(text);
+                $('#enter_link').val(link);
+                if(image == ''){
+                        
+                }
+        }               
+</script>
