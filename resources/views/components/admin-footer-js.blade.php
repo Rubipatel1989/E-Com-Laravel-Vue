@@ -15,7 +15,7 @@
 <!--app JS-->
 <script src="{{asset('assets/js/app.js')}}"></script>
 
-<script src="https://developercodez.com/developerCorner/parsley/parsley.min.js"></script>
+<script src="{{asset('assets/js/parsley.min.js')}}"></script>
 <script src="{{asset('snackbar/dist/js-snackbar.js')}}"></script>
 
 

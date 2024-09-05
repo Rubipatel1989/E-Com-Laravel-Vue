@@ -84,7 +84,7 @@
                                 <h5 class="modal-title" id="exampleModalLabel">Home Banner</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form method="post" action="{{ url('updateHomeBanner') }}" enctype="multipart/form-data">
+                        <form id="formSubmit" method="post" action="{{ url('updateHomeBanner') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="modal-body">
                                         <div class="border p-4 rounded">
@@ -111,14 +111,8 @@
                                                         <div class="col-sm-9">
                                                                 <input type="file" name="image" class="form-control" id="photo" placeholder="Image" required>
                                                         </div>
-                                                        <div>
+                                                        <div id="image_key">
                                                                 <img src="" id="imgPreview" style="height: 200px; width:200px;">
-                                                        </div>
-                                                </div>
-                                                <div class="row">
-                                                        <label class="col-sm-3 col-form-label"></label>
-                                                        <div class="col-sm-9">
-                                                                <button type="submit" class="btn btn-info px-5">Register</button>
                                                         </div>
                                                 </div>
                                                 <input type="hidden" name="id" id="enter_id">
@@ -126,7 +120,9 @@
                                 </div>
                                 <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                        <span id="submitButton">
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </span>
                                 </div>
                         </form>
 
@@ -141,8 +137,26 @@
                 $('#enter_id').val(id);
                 $('#enter_text').val(text);
                 $('#enter_link').val(link);
-                if(image == ''){
-                        
+                if (image == '') {
+                        var key_image = "{{ URL::asset('images/upload.png') }}";
+                } else {
+                        var key_image = "{{ URL::asset('images') }}/" + image + " "
                 }
-        }               
+                var html = '<img src="' + key_image + '" id="imgPreview" style="height: 200px; width:200px;">';
+                $('#image_key').html(html);     
+
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+                document.getElementById("photo").addEventListener("change", function(event) {
+                        const file = event.target.files[0]; // Get the selected file
+                        if (file) {
+                                const reader = new FileReader(); // FileReader to read file as a data URL
+                                reader.onload = function(e) {
+                                        // Set the image preview src to the file's data URL
+                                        document.getElementById("imgPreview").src = e.target.result;
+                                }
+                                reader.readAsDataURL(file); // Read the file
+                        }
+                });
+        });
 </script>
