@@ -14,3 +14,4 @@ Route::get('/profile', [ProfileController::class, 'index']);
 Route::post('/saveProfile', [ProfileController::class, 'store']);
 ## Home Banner
 Route::get('/home_banner', [HomeBannerController::class, 'index']);
+Route::post('/updateHomeBanner', [HomeBannerController::class, 'store']);
