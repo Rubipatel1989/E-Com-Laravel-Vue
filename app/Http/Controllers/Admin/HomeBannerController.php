@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\File;
 
 class HomeBannerController extends Controller
 {
+    use ApiResponse;
     /**
      * Display a listing of the resource.
      */
@@ -38,7 +39,7 @@ class HomeBannerController extends Controller
         $validation = Validator::make($request->all(), [
             'text' => 'required|string|max:200',
             'link' => 'required|string|max:200',
-            'id' => 'required|integer',
+            'id' => 'nullable|integer',
             'image' => 'mimes:jpeg,png,jpg,gif|max:5120'
 
         ]);
@@ -46,33 +47,28 @@ class HomeBannerController extends Controller
             return $this->error([''], $validation->errors()->first());
         } else {
             if ($request->hasFile('image')) {
-                if ($request->post('id') > 0) {
-                    $image = HomeBanner::where('id', $request->post('id'))->first();
+                if ($request->id > 0) {
+                    $image = HomeBanner::where('id', $request->id)->first();
                     $image_path = "images/" . $image->image;
                     if (File::exists($image_path)) {
                         File::delete($image_path);
                     }
-                    //dd($image);
                 }
-                $image_name = time() . '.' . $request->image->extension();                
+                $image_name = time() . '.' . $request->image->extension();
                 $request->image->move(public_path('images/'), $image_name);
-            } elseif($request->post('id') > 0) {
-                
+            } elseif ($request->id > 0) {
+                $image_name = HomeBanner::where('id', $request->id)->pluck('image')->first();
             }
-            $user = HomeBanner::updateOrCreate(
-                ['id' => Auth::User()->id],
+            HomeBanner::updateOrCreate(
+                ['id' => $request->id],
                 [
-                    'email' => $request->email,
-                    'name' => $request->name,
-                    'address' => $request->address,
-                    'phone' => $request->phone,
-                    'twitter_link' => $request->twitter_link,
-                    'fb_link' => $request->fb_link,
-                    'insta_link' => $request->insta_link,
-                    'image' => $image_name
+                    'link' => $request->link,
+                    'text' => $request->text,
+                    'image' => $image_name,
                 ]
             );
-            return $this->success([''], 'Successfully updated.');
+
+            return $this->success(['reload' => true], 'Successfully updated.');
         }
     }
 

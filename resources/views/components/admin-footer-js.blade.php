@@ -53,6 +53,9 @@
                                           if (result.status == 'Success') {
                                                  showAlert(result.status, result.message);
                                                  $('#submitButton').html(html1);
+                                                 if (result.data.reload != 'undefined') {
+                                                        window.location.reload();
+                                                 }
                                           } else {
                                                  showAlert(result.status, result.message);
                                                  $('#submitButton').html(html1);

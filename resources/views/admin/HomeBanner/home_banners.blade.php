@@ -140,7 +140,8 @@
                 if (image == '') {
                         var key_image = "{{ URL::asset('images/upload.png') }}";
                 } else {
-                        var key_image = "{{ URL::asset('images') }}/" + image + " "
+                        var key_image = "{{ URL::asset('images') }}/" + image + " ";
+                        $('#photo').removeAttr('required');
                 }
                 var html = '<img src="' + key_image + '" id="imgPreview" style="height: 200px; width:200px;">';
                 $('#image_key').html(html);     
