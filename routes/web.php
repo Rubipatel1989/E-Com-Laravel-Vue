@@ -20,7 +20,7 @@ Route::get('/', function () {
     return redirect('admin/dashboard');
 });
 
-Route::get('/createAdmin',[AuthController::class, 'createCustomer']);
+Route::get('/createAdmin', [AuthController::class, 'createCustomer']);
 
 Route::get('/login', function () {
     return view('auth/signIn');

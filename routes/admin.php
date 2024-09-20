@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HomeBannerController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Models\HomeBanner;
@@ -15,3 +16,6 @@ Route::post('/saveProfile', [ProfileController::class, 'store']);
 ## Home Banner
 Route::get('/home_banner', [HomeBannerController::class, 'index']);
 Route::post('/updateHomeBanner', [HomeBannerController::class, 'store']);
+
+### Delete using common function
+Route::get('/deleteData/{id?}/{table?}', [DashboardController::class, 'deleteData']);

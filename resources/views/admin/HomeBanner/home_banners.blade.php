@@ -56,7 +56,10 @@
                                                                 <td>{{ $list->image }}</td>
                                                                 <td>{{ $list->created_at }}</td>
                                                                 <td>{{ $list->updated_at }}</td>
-                                                                <td><button type="button" onclick="saveData('{{$list->id}}', '{{$list->text}}', '{{$list->link}}', '{{$list->image}}')" class="btn btn-outline-info px-5 radius-30" data-bs-toggle="modal" data-bs-target="#exampleModal">Update</button></td>
+                                                                <td>
+                                                                        <button type="button" onclick="saveData('{{$list->id}}', '{{$list->text}}', '{{$list->link}}', '{{$list->image}}')" class="btn btn-outline-info px-5 radius-30" data-bs-toggle="modal" data-bs-target="#exampleModal">Update</button>
+                                                                        <button type="button" onclick="deleteData('{{$list->id}}', 'home_banners')" class="btn btn-outline-danger px-5 radius-30">Delete</button>
+                                                                </td>
                                                         </tr>
                                                         @endforeach
                                                 </tbody>
@@ -121,7 +124,7 @@
                                 <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                         <span id="submitButton">
-                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                                <button type="submit" class="btn btn-primary">Save changes</button>
                                         </span>
                                 </div>
                         </form>
@@ -144,9 +147,44 @@
                         $('#photo').removeAttr('required');
                 }
                 var html = '<img src="' + key_image + '" id="imgPreview" style="height: 200px; width:200px;">';
-                $('#image_key').html(html);     
+                $('#image_key').html(html);
 
         }
+
+        function deleteData(id, table) {
+                var text = 'Are you sure for delete ?';
+                if (confirm(text) == true) {
+                        $.ajax({
+                                type: 'GET',
+                                url: "{{ url('admin/deleteData') }}/" + id + "/" + table,
+                                data: '',
+                                cache: false,
+                                contentType: false,
+                                processData: false,
+                                success: function(result) {
+                                        if (result.status == 'Success') {
+                                                showAlert(result.status, result.message);
+
+                                                if (result.data.reload != 'undefined') {
+                                                        window.location.reload();
+                                                }
+                                        } else {
+                                                showAlert(result.status, result.message);
+
+                                        }
+
+                                },
+                                error: function(result) {
+                                        showAlert(result.responseJSON.status, result.responseJSON.message);
+                                }
+
+                        });
+                }
+
+
+
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById("photo").addEventListener("change", function(event) {
                         const file = event.target.files[0]; // Get the selected file
