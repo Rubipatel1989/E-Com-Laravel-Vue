@@ -79,6 +79,40 @@
                      position: "br"
               });
        }
+       function deleteData(id, table) {
+                var text = 'Are you sure for delete ?';
+                if (confirm(text) == true) {
+                        $.ajax({
+                                type: 'GET',
+                                url: "{{ url('admin/deleteData') }}/" + id + "/" + table,
+                                data: '',
+                                cache: false,
+                                contentType: false,
+                                processData: false,
+                                success: function(result) {
+                                        if (result.status == 'Success') {
+                                                showAlert(result.status, result.message);
+
+                                                if (result.data.reload != 'undefined') {
+                                                        window.location.reload();
+                                                }
+                                        } else {
+                                                showAlert(result.status, result.message);
+
+                                        }
+
+                                },
+                                error: function(result) {
+                                        showAlert(result.responseJSON.status, result.responseJSON.message);
+                                }
+
+                        });
+                }
+
+
+
+        }
+
 </script>
 <script>
        $(document).ready(function() {

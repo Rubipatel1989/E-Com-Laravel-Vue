@@ -28,6 +28,13 @@
 			</a>
 		</li>
 		<li>
+			<a href="{{ url('admin/manage_size') }}">
+				<div class="parent-icon"><i class='bx bx-cookie'></i>
+				</div>
+				<div class="menu-title">Manage Size</div>
+			</a>
+		</li>
+		<li>
 			<a href="javascript:;" class="has-arrow">
 				<div class="parent-icon"><i class='bx bx-cart'></i>
 				</div>
@@ -78,9 +85,6 @@
 				<div class="menu-title">User Profile</div>
 			</a>
 		</li>
-
-
-
 	</ul>
 	<!--end navigation-->
 </div>
