@@ -51,7 +51,7 @@
                                                         <tr>
                                                                 <td>{{ $list->id}}</td>
                                                                 <td>{{ $list->text }}</td>
-                                                                <td style="color:{{$list->value}}">Color</td>
+                                                                <td class="box_color" style="background-color:{{$list->value}}"></td>
                                                                 <td>{{ $list->created_at }}</td>
                                                                 <td>{{ $list->updated_at }}</td>
                                                                 <td>
