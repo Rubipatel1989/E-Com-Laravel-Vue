@@ -47,17 +47,17 @@ class AttributeController extends Controller
 
     public function index_attribute_value()
     {
-        $data = AttributeValue::get();
+        $data = AttributeValue::with('singleAttribute')->get();
         $attribute = Attribute::get();
         return view('admin/Attribute/attribute_value', get_defined_vars());
     }
 
-    
+
     public function store_attribute_value(Request $request)
     {
         $validation = Validator::make($request->all(), [
-            'attributes_id' => 'required|integer|max:200',
-            'value' => 'required|string|max:200',
+            'attributes_id' => 'required|exists:attributes,id',
+            'attributes_value' => 'required|string|max:200',
             'id' => 'nullable|integer',
 
         ]);
@@ -67,7 +67,8 @@ class AttributeController extends Controller
             AttributeValue::updateOrCreate(
                 ['id' => $request->id],
                 [
-                    'text' => $request->text,
+                    'attributes_id' => $request->attributes_id,
+                    'value' => $request->attributes_value,
                 ]
             );
 

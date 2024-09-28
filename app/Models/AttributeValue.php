@@ -12,4 +12,8 @@ class AttributeValue extends Model
         'attributes_id',
         'value'
     ];
+    public function singleAttribute()
+    {
+        return $this->hasOne(Attribute::class, 'id', 'attributes_id');
+    }
 }
