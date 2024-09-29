@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AttributeController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HomeBannerController;
@@ -30,6 +31,9 @@ Route::get('/attribute_name', [AttributeController::class, 'index_attribute_name
 Route::post('/updateAttributeName', [AttributeController::class, 'store_attribute_name']);
 Route::get('/attribute_value', [AttributeController::class, 'index_attribute_value']);
 Route::post('/updateAttributeValue', [AttributeController::class, 'store_attribute_value']);
+## Category Manage
+Route::get('/manage_category', [CategoryController::class, 'index']);
+Route::post('/updateCategory', [CategoryController::class, 'store']);
 
 ### Delete using common function
 Route::get('/deleteData/{id?}/{table?}', [DashboardController::class, 'deleteData']);

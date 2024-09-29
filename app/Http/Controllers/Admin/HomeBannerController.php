@@ -54,7 +54,7 @@ class HomeBannerController extends Controller
                         File::delete($image_path);
                     }
                 }
-                $image_name = time() . '.' . $request->image->extension();
+                $image_name = 'images/' . $request->name  . time() . '.' . $request->image->extension();
                 $request->image->move(public_path('images/'), $image_name);
             } elseif ($request->id > 0) {
                 $image_name = HomeBanner::where('id', $request->id)->pluck('image')->first();
