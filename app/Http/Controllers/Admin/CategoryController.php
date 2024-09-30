@@ -29,6 +29,7 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
+        //dd($request->all());
         $validation = Validator::make($request->all(), [
             'name' => 'required|string|max:200',
             'slug' => 'required|string|max:200',
@@ -42,20 +43,34 @@ class CategoryController extends Controller
             if ($request->id > 0) {
                 $image = Category::where('id', $request->id)->first();
                 $imageName = $image->image;
-                $imageName = $this->saveImage($request->image, $imageName, 'images/categories');
+                if ($request->hasFile('image')) {
+                    $imageName = $this->saveImage($request->image, $imageName, 'images/categories');
+                }
             } else {
-                $imageName = $this->saveImage($request->image, '', 'images/categories');
+                if ($request->hasFile('image')) {
+                    $imageName = $this->saveImage($request->image, '', 'images/categories');
+                }
             }
-
-            Category::updateOrCreate(
-                ['id' => $request->id],
-                [
-                    'name' => $request->name,
-                    'slug' => $request->slug,
-                    'image' => $imageName,
-                    'parent_category_id' => $request->parent_category_id
-                ]
-            );
+            if ($request->parent_category_id > 0) {
+                Category::updateOrCreate(
+                    ['id' => $request->id],
+                    [
+                        'name' => $request->name,
+                        'slug' => $request->slug,
+                        'image' => $imageName,
+                        'parent_category_id' => $request->parent_category_id
+                    ]
+                );
+            } else {
+                Category::updateOrCreate(
+                    ['id' => $request->id],
+                    [
+                        'name' => $request->name,
+                        'slug' => $request->slug,
+                        'image' => $imageName,
+                    ]
+                );
+            }
 
             return $this->success(['reload' => true], 'Successfully updated.');
         }

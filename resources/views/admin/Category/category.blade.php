@@ -30,7 +30,7 @@
                 <h6 class="mb-0 text-uppercase">ADD NAME</h6>
                 <hr />
                 <div class="col">
-                        <button type="button" onclick="saveData('0', '','','')" class="btn btn-outline-info px-5 radius-30" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Category</button>
+                        <button type="button" onclick="saveData('0', '','','','0')" class="btn btn-outline-info px-5 radius-30" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Category</button>
                 </div>
                 <div class="card">
                         <div class="card-body">
@@ -57,7 +57,7 @@
                                                                 <td>{{ $list->created_at }}</td>
                                                                 <td>{{ $list->updated_at }}</td>
                                                                 <td>
-                                                                        <button type="button" onclick="saveData('{{$list->id}}', '{{$list->name}}', '{{$list->slug}}', '{{$list->image}}')" class="btn btn-outline-info px-5 radius-30" data-bs-toggle="modal" data-bs-target="#exampleModal">Update</button>
+                                                                        <button type="button" onclick="saveData('{{$list->id}}', '{{$list->name}}', '{{$list->slug}}', '{{$list->image}}', '{{$list->parent_category_id}}')" class="btn btn-outline-info px-5 radius-30" data-bs-toggle="modal" data-bs-target="#exampleModal">Update</button>
                                                                         <button type="button" onclick="deleteData('{{$list->id}}', 'categories')" class="btn btn-outline-danger px-5 radius-30">Delete</button>
                                                                 </td>
                                                         </tr>
@@ -110,6 +110,17 @@
                                                         </div>
                                                 </div>
                                                 <div class="row mb-3">
+                                                        <label for="enter_text" class="col-sm-3 col-form-label">Parent Category ID</label>
+                                                        <div class="col-sm-9">
+                                                                <select class="form-control" name="parent_category_id" id="parent_category_id">
+                                                                        <option value="0">Select Parent</option>
+                                                                        @foreach ($data as $list1)
+                                                                        <option value="{{$list1->id}}">{{ $list1->name }}</option>
+                                                                        @endforeach
+                                                                </select>
+                                                        </div>
+                                                </div>
+                                                <div class="row mb-3">
                                                         <label for="enter_image" class="col-sm-3 col-form-label">Image</label>
                                                         <div class="col-sm-9">
                                                                 <input type="file" name="image" class="form-control" id="photo" placeholder="Image" required>
@@ -133,20 +144,39 @@
         </div>
 </div>
 <script>
-        function saveData(id, name, slug, image) {
+        function saveData(id, name, slug, image, parent_category_id) {
                 $('#enter_id').val(id);
                 $('#enter_name').val(name);
                 $('#enter_slug').val(slug);
+
+                // Clear existing options in the parent category dropdown
+                $('#parent_category_id').find('option').each(function() {
+                        $(this).prop('disabled', false); // Enable all options first
+                });
+
+                // Disable the option with the current category id
+                if (id !== '') {
+                        $('#parent_category_id').find('option[value="' + id + '"]').prop('disabled', true);
+                }
+
+                // Ensure the correct parent category ID is selected
+                if (parent_category_id !== '' && parent_category_id !== '0') {
+                        $('#parent_category_id').val(parent_category_id).change();
+                } else {
+                        $('#parent_category_id').val('0').change(); // Default to 'Select Parent'
+                }
+
                 if (image == '') {
                         var key_image = "{{ URL::asset('images/upload.png') }}";
                 } else {
-                        var key_image = "{{ URL::asset('images') }}/" + image + " ";
+                        var key_image = "{{ URL::asset('') }}" + image + " ";
                         $('#photo').removeAttr('required');
                 }
+
                 var html = '<img src="' + key_image + '" id="imgPreview" style="height: 200px; width:200px;">';
                 $('#image_key').html(html);
-
         }
+
         document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById("photo").addEventListener("change", function(event) {
                         const file = event.target.files[0]; // Get the selected file

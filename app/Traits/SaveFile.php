@@ -27,7 +27,7 @@ trait SaveFile
                      $file->move(public_path('images/'), $image_name);
               } else {
                      $image_name = $path . '/' . time() . '.' . $file->extension();
-                     $file->move(public_path('/'), $image_name);
+                     $file->move(public_path($path), $image_name);
               }
               return $image_name;
        }
