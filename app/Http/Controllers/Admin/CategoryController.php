@@ -75,9 +75,33 @@ class CategoryController extends Controller
             return $this->success(['reload' => true], 'Successfully updated.');
         }
     }
-    public function index_category_attribute(Request $request){
+    public function index_category_attribute(Request $request)
+    {
         $data = CategoryAttribute::with('category', 'attribute')->get();
-        prx($data->toArray());
-        return view('admin/Category/category', get_defined_vars());
+        $category = Category::get();
+        $attribute = Attribute::get();
+        return view('admin/Category/category_attribute', get_defined_vars());
+    }
+    public function store_category_attribute(Request $request)
+    {
+        $validation = Validator::make($request->all(), [
+            'attribute_id' => 'required|exists:attributes,id',
+            'category_id' => 'required|exists:categories,id',
+            'id' => 'nullable|integer',
+
+        ]);
+        if ($validation->fails()) {
+            return $this->error([''], $validation->errors()->first());
+        } else {
+            CategoryAttribute::updateOrCreate(
+                ['id' => $request->id],
+                [
+                    'attribute_id' => $request->attribute_id,
+                    'category_id' => $request->category_id
+                ]
+            );
+
+            return $this->success(['reload' => true], 'Successfully updated.');
+        }
     }
 }

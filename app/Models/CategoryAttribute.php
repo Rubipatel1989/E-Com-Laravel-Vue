@@ -9,7 +9,10 @@ class CategoryAttribute extends Model
 {
     use HasFactory;
     protected $table = 'category_attribute';
-
+    protected $fillable = [
+        'attribute_id',
+        'category_id'
+    ];
     public function attribute()
     {
         return $this->hasOne(Attribute::class, 'id', 'attribute_id');
