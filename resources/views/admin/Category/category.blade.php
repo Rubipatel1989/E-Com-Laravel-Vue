@@ -41,7 +41,7 @@
                                                                 <th>ID</th>
                                                                 <th>Name</th>
                                                                 <th>Slug</th>
-                                                                <th>Image</th>
+                                                                <th>Parent Category</th>
                                                                 <th>Created</th>
                                                                 <th>Updated</th>
                                                                 <th>Action</th>
@@ -53,7 +53,7 @@
                                                                 <td>{{ $list->id}}</td>
                                                                 <td>{{ $list->name }}</td>
                                                                 <td>{{ $list->slug }}</td>
-                                                                <td>{{ $list->slug }}</td>
+                                                                <td>{{ $list->parentCategory ? $list->parentCategory->name : 'No Parent' }}</td>
                                                                 <td>{{ $list->created_at }}</td>
                                                                 <td>{{ $list->updated_at }}</td>
                                                                 <td>
@@ -68,7 +68,7 @@
                                                                 <th>ID</th>
                                                                 <th>Name</th>
                                                                 <th>Slug</th>
-                                                                <th>Image</th>
+                                                                <th>Parent Category</th>
                                                                 <th>Created</th>
                                                                 <th>Updated</th>
                                                                 <th>Action</th>

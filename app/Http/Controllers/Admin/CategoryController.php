@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 
 use App\Models\Attribute;
+use App\Models\CategoryAttribute;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -23,13 +24,12 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $data = Category::get();
+        $data = Category::with('parentCategory')->get();
         return view('admin/Category/category', get_defined_vars());
     }
 
     public function store(Request $request)
     {
-        //dd($request->all());
         $validation = Validator::make($request->all(), [
             'name' => 'required|string|max:200',
             'slug' => 'required|string|max:200',
@@ -74,5 +74,10 @@ class CategoryController extends Controller
 
             return $this->success(['reload' => true], 'Successfully updated.');
         }
+    }
+    public function index_category_attribute(Request $request){
+        $data = CategoryAttribute::with('category', 'attribute')->get();
+        prx($data->toArray());
+        return view('admin/Category/category', get_defined_vars());
     }
 }

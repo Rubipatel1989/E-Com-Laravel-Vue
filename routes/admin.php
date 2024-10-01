@@ -34,6 +34,8 @@ Route::post('/updateAttributeValue', [AttributeController::class, 'store_attribu
 ## Category Manage
 Route::get('/manage_category', [CategoryController::class, 'index']);
 Route::post('/updateCategory', [CategoryController::class, 'store']);
+Route::get('/category_attribute', [CategoryController::class, 'index_category_attribute']);
+Route::post('/updateCategoryAttribute', [CategoryController::class, 'store_category_attribute']);
 
 ### Delete using common function
 Route::get('/deleteData/{id?}/{table?}', [DashboardController::class, 'deleteData']);
