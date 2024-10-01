@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AttributeController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -36,6 +37,9 @@ Route::get('/manage_category', [CategoryController::class, 'index']);
 Route::post('/updateCategory', [CategoryController::class, 'store']);
 Route::get('/category_attribute', [CategoryController::class, 'index_category_attribute']);
 Route::post('/updateCategoryAttribute', [CategoryController::class, 'store_category_attribute']);
+## Brand Manage
+Route::get('/manage_brand', [BrandController::class, 'index']);
+Route::post('/updateBrand', [BrandController::class, 'store']);
 
 ### Delete using common function
 Route::get('/deleteData/{id?}/{table?}', [DashboardController::class, 'deleteData']);

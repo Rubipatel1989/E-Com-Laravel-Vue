@@ -28,6 +28,13 @@
 			</a>
 		</li>
 		<li>
+			<a href="{{ url('admin/manage_brand') }}">
+				<div class="parent-icon"><i class='bx bx-cookie'></i>
+				</div>
+				<div class="menu-title">Brands</div>
+			</a>
+		</li>
+		<li>
 			<a href="{{ url('admin/manage_size') }}">
 				<div class="parent-icon"><i class='bx bx-cookie'></i>
 				</div>
