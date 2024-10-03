@@ -23,18 +23,23 @@ class ProductController extends Controller
 {
     use ApiResponse;
     use SaveFile;
-    
+
     public function getCategoryAttributes($categoryId)
     {
-        $attributes = Attribute::whereIn('id', function($query) use ($categoryId) {
+        $attributes = Attribute::whereIn('id', function ($query) use ($categoryId) {
             $query->select('attribute_id')
-                  ->from('category_attribute')
-                  ->where('category_id', $categoryId);
+                ->from('category_attribute')
+                ->where('category_id', $categoryId);
         })->get();
 
         return $this->success(['reload' => false, 'attributes' => $attributes], 'Successfully Fetched.');
     }
 
+    public function getProductAttributes($productId)
+    {
+        $attributeValues = ProductAttribute::where('product_id', $productId)->pluck('attribute_value_id');
+        return $this->success(['reload' => false, 'attribute_values' => $attributeValues], 'Product Attributes Successfully Fetched.');
+    }
     public function index()
     {
         $data = Product::with('category', 'brand', 'tax')->get();
@@ -55,7 +60,9 @@ class ProductController extends Controller
             'id' => 'nullable|integer',
             'category_id' => 'required|exists:categories,id',
             'tax_id' => 'required|exists:taxes,id',
-            'image' => 'mimes:jpeg,png,jpg,gif|max:5120'
+            'image' => 'mimes:jpeg,png,jpg,gif|max:5120',
+            'attribute_values.*' => 'exists:attribute_values,id' // Validate attribute values exist
+
 
         ]);
         if ($validation->fails()) {
@@ -89,19 +96,19 @@ class ProductController extends Controller
             );
 
             // Update product attributes
-        if ($request->has('attribute_values')) {
-            // Clear old attributes
-            ProductAttribute::where('product_id', $product->id)->delete();
+            if ($request->has('attribute_values')) {
+                // Clear old attributes
+                ProductAttribute::where('product_id', $product->id)->delete();
 
-            // Insert new attributes
-            foreach ($request->attribute_values as $attributeValueId) {
-                ProductAttribute::create([
-                    'product_id' => $product->id,
-                    'category_id' => $request->category_id,
-                    'attribute_value_id' => $attributeValueId
-                ]);
+                // Insert new attributes
+                foreach ($request->attribute_values as $attributeValueId) {
+                    ProductAttribute::create([
+                        'product_id' => $product->id,
+                        'category_id' => $request->category_id,
+                        'attribute_value_id' => $attributeValueId
+                    ]);
+                }
             }
-        }
 
             return $this->success(['reload' => true], 'Successfully updated.');
         }

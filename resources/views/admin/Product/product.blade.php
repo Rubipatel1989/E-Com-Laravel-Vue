@@ -147,13 +147,14 @@
                                                                 </select>
                                                         </div>
                                                 </div>
-                                                <div class="row mb-3">
+                                                <div class="row mb-3" id="category_attributes_div" style="display:none;">
                                                         <label for="category_attributes" class="col-sm-3 col-form-label">Category Attributes</label>
                                                         <div class="col-sm-9">
                                                                 <select class="form-control" name="attribute_values[]" id="category_attributes" multiple>
                                                                 </select>
                                                         </div>
                                                 </div>
+
 
                                                 <div class="row mb-3">
                                                         <label for="brand_id" class="col-sm-3 col-form-label">Brand</label>
@@ -222,26 +223,56 @@
                 var html = '<img src="' + key_image + '" id="imgPreview" style="height: 200px; width:200px;">';
                 $('#image_key').html(html);
 
-                // Trigger change event to load category attributes
-                loadCategoryAttributes(category_id);
+                // Load and select category attributes for editing
+                loadCategoryAttributes(category_id, id);
         }
 
-        function loadCategoryAttributes(categoryId) {
+
+        function loadCategoryAttributes(categoryId, productId = null) {
                 if (categoryId != 0) {
+                        $('#category_attributes_div').show(); // Show the attributes div when category is selected
+
                         $.ajax({
-                                url: '/admin/product/category-attributes/' + categoryId, // Define a route for fetching category attributes
+                                url: '/admin/product/category-attributes/' + categoryId,
                                 method: 'GET',
                                 success: function(data) {
-                                        console.log('Pawan Kumar', data.data.attributes);
                                         let options = '';
                                         data.data.attributes.forEach(function(attribute) {
                                                 options += `<option value="${attribute.id}">${attribute.name}</option>`;
                                         });
                                         $('#category_attributes').html(options); // Populate multiselect dropdown
+
+                                        // If editing a product, load and select the existing attribute values
+                                        if (productId) {
+                                                $.ajax({
+                                                        url: '/admin/product/get-product-attributes/' + productId,
+                                                        method: 'GET',
+                                                        success: function(response) {
+                                                                let selectedAttributes = response.data.attribute_values;
+                                                                selectedAttributes.forEach(function(attrValueId) {
+                                                                        $('#category_attributes option[value="' + attrValueId + '"]').prop('selected', true);
+                                                                });
+                                                        }
+                                                });
+                                        }
                                 }
                         });
+                } else {
+                        $('#category_attributes_div').hide(); // Hide the attributes div if no category is selected
                 }
         }
+
+        $(document).ready(function() {
+                // When adding a product, hide the attributes div by default
+                $('#category_attributes_div').hide();
+
+                // Trigger change on category dropdown to load attributes dynamically
+                $('#category_id').on('change', function() {
+                        loadCategoryAttributes($(this).val());
+                });
+        });
+
+
 
         document.addEventListener("DOMContentLoaded", function() {
                 document.getElementById("photo").addEventListener("change", function(event) {
@@ -256,8 +287,11 @@
                         }
                 });
         });
-
         $(document).ready(function() {
+                // When adding a product, hide the attributes div by default
+                $('#category_attributes_div').hide();
+
+                // Trigger change on category dropdown to load attributes dynamically
                 $('#category_id').on('change', function() {
                         loadCategoryAttributes($(this).val());
                 });
