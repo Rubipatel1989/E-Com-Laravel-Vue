@@ -26,13 +26,11 @@ class ProductController extends Controller
 
     public function getCategoryAttributes($categoryId)
     {
-        $attributes = Attribute::whereIn('id', function ($query) use ($categoryId) {
-            $query->select('attribute_id')
-                ->from('category_attribute')
-                ->where('category_id', $categoryId);
-        })->get();
-
-        return $this->success(['reload' => false, 'attributes' => $attributes], 'Successfully Fetched.');
+        $category = Category::with('attributes')->find($categoryId);
+        if (!$category) {
+            return $this->error(['reload' => true], 'Data Not Found.');
+        }
+        return $this->success(['reload' => false, 'attributes' => $category->attributes], 'Successfully Fetched.');
     }
 
     public function getProductAttributes($productId)

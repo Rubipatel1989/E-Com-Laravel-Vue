@@ -17,5 +17,10 @@ class Category extends Model
     public function parentCategory()
     {
         return $this->belongsTo(Category::class, 'parent_category_id');
-    }    
+    }
+    
+    public function attributes()
+    {
+        return $this->belongsToMany(Attribute::class, 'category_attribute', 'category_id', 'attribute_id');
+    }
 }

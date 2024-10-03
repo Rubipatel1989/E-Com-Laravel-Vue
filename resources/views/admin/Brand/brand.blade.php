@@ -89,7 +89,7 @@
                                           <div class="row mb-3">
                                                  <label for="enter_name" class="col-sm-3 col-form-label">Enter Text</label>
                                                  <div class="col-sm-9">
-                                                        <input type="text" name="text" class="form-control" id="enter_name" placeholder="Enter Your Name" required>
+                                                        <input type="text" name="text" class="form-control" id="text" placeholder="Enter Name" required>
                                                  </div>
                                           </div>
                                           <div class="row mb-3">
@@ -118,7 +118,7 @@
 <script>
        function saveData(id, text, image) {
               $('#enter_id').val(id);
-              $('#text').val(name);
+              $('#text').val(text);
 
               if (image == '') {
                      var key_image = "{{ URL::asset('images/upload.png') }}";
