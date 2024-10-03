@@ -49,6 +49,7 @@ class AttributeController extends Controller
     {
         $data = AttributeValue::with('singleAttribute')->get();
         $attribute = Attribute::get();
+       // prx($attribute->toArray());
         return view('admin/Attribute/attribute_value', get_defined_vars());
     }
 

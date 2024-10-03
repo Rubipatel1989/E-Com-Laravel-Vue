@@ -6,8 +6,10 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\HomeBannerController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SizeController;
+use App\Http\Controllers\Admin\TaxController;
 use App\Models\HomeBanner;
 use Illuminate\Support\Facades\Route;
 
@@ -40,6 +42,14 @@ Route::post('/updateCategoryAttribute', [CategoryController::class, 'store_categ
 ## Brand Manage
 Route::get('/manage_brand', [BrandController::class, 'index']);
 Route::post('/updateBrand', [BrandController::class, 'store']);
+## Tax Manage
+Route::get('/manage_taxes', [TaxController::class, 'index']);
+Route::post('/updateTax', [TaxController::class, 'store']);
+## Product Manage
+Route::get('/manage_product', [ProductController::class, 'index']);
+Route::get('/product/category-attributes/{categoryId}', [ProductController::class, 'getCategoryAttributes']);
+
+Route::post('/updateProduct', [ProductController::class, 'store']);
 
 ### Delete using common function
 Route::get('/deleteData/{id?}/{table?}', [DashboardController::class, 'deleteData']);

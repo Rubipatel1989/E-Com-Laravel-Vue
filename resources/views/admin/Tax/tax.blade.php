@@ -4,13 +4,13 @@
         <div class="page-content">
                 <!--breadcrumb-->
                 <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                        <div class="breadcrumb-title pe-3">ADD Attribute Value</div>
+                        <div class="breadcrumb-title pe-3">Tax</div>
                         <div class="ps-3">
                                 <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb mb-0 p-0">
                                                 <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                                                 </li>
-                                                <li class="breadcrumb-item active" aria-current="page">ADD Attribute Value</li>
+                                                <li class="breadcrumb-item active" aria-current="page">Update Tax</li>
                                         </ol>
                                 </nav>
                         </div>
@@ -27,11 +27,10 @@
                                 </div>
                         </div>
                 </div>
-                <h6 class="mb-0 text-uppercase">ADD NAME</h6>
+                <h6 class="mb-0 text-uppercase">Add Tax</h6>
                 <hr />
                 <div class="col">
-                        <button type="button" onclick="saveData('0', '','')" class="btn btn-outline-info px-5 radius-30" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Attribute Value</button>
-
+                        <button type="button" onclick="saveData('0', '')" class="btn btn-outline-info px-5 radius-30" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Tax</button>
                 </div>
                 <div class="card">
                         <div class="card-body">
@@ -40,8 +39,7 @@
                                                 <thead>
                                                         <tr>
                                                                 <th>ID</th>
-                                                                <th>Attribute Name</th>
-                                                                <th>Value</th>
+                                                                <th>Text</th>
                                                                 <th>Created</th>
                                                                 <th>Updated</th>
                                                                 <th>Action</th>
@@ -51,13 +49,12 @@
                                                         @foreach ($data as $list)
                                                         <tr>
                                                                 <td>{{ $list->id}}</td>
-                                                                <td>{{ $list['singleAttribute']->name }}, ({{ $list['singleAttribute']->slug }})</td>
-                                                                <td>{{ $list->value }}</td>
+                                                                <td>{{ $list->text }}</td>
                                                                 <td>{{ $list->created_at }}</td>
                                                                 <td>{{ $list->updated_at }}</td>
                                                                 <td>
-                                                                        <button type="button" onclick="saveData('{{$list->id}}', '{{$list->attributes_id}}', '{{$list->value}}')" class="btn btn-outline-info px-5 radius-30" data-bs-toggle="modal" data-bs-target="#exampleModal">Update</button>
-                                                                        <button type="button" onclick="deleteData('{{$list->id}}', 'attribute_values')" class="btn btn-outline-danger px-5 radius-30">Delete</button>
+                                                                        <button type="button" onclick="saveData('{{$list->id}}', '{{$list->text}}')" class="btn btn-outline-info px-5 radius-30" data-bs-toggle="modal" data-bs-target="#exampleModal">Update</button>
+                                                                        <button type="button" onclick="deleteData('{{$list->id}}', 'taxes')" class="btn btn-outline-danger px-5 radius-30">Delete</button>
                                                                 </td>
                                                         </tr>
                                                         @endforeach
@@ -65,12 +62,10 @@
                                                 <tfoot>
                                                         <tr>
                                                                 <th>ID</th>
-                                                                <th>Attribute ID</th>
-                                                                <th>Value</th>
+                                                                <th>Text</th>
                                                                 <th>Created</th>
                                                                 <th>Updated</th>
                                                                 <th>Action</th>
-                                                        </tr>
                                                         </tr>
                                                 </tfoot>
                                         </table>
@@ -83,28 +78,23 @@
         <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                         <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Manage Attribute Value</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Manage Tax</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form id="formSubmit" method="post" action="{{ url('admin/updateAttributeValue') }}">
+                        <form id="formSubmit" method="post" action="{{ url('admin/updateTax') }}">
                                 @csrf
                                 <div class="modal-body">
                                         <div class="border p-4 rounded">
+                                                <div class="card-title d-flex align-items-center">
+                                                        <!-- <div><i class="bx bxs-user me-1 font-22 text-info"></i>
+                                                        </div> -->
+                                                        <!-- <h5 class="mb-0 text-info">User Registration</h5> -->
+                                                </div>
                                                 <hr />
                                                 <div class="row mb-3">
-                                                        <label for="enter_text" class="col-sm-3 col-form-label">Attribute Name</label>
+                                                        <label for="enter_text" class="col-sm-3 col-form-label">Enter Your Text</label>
                                                         <div class="col-sm-9">
-                                                                <select class="form-control" name="attributes_id" id="attributes_id" required>
-                                                                        @foreach ($attribute as $list1)
-                                                                        <option value="{{$list1->id}}">{{ $list1->name }}, ({{ $list1->slug }})</option>
-                                                                        @endforeach
-                                                                </select>
-                                                        </div>
-                                                </div>
-                                                <div class="row mb-3">
-                                                        <label for="enter_text" class="col-sm-3 col-form-label">Attribute Value</label>
-                                                        <div class="col-sm-9">
-                                                                <input type="text" name="attributes_value" class="form-control" id="attributes_value" placeholder="Enter Value" required>
+                                                                <input type="number" name="text" class="form-control" id="enter_text" placeholder="Enter Your Text" required>
                                                         </div>
                                                 </div>
                                                 <input type="hidden" name="id" id="enter_id">
@@ -124,11 +114,11 @@
 
 
 <script>
-        function saveData(id, attributes_id, attributes_value) {
+        function saveData(id, text) {
                 $('#enter_id').val(id);
-                $('#attributes_id').val(attributes_id);
-                $('#attributes_value').val(attributes_value);
+                $('#enter_text').val(text);
 
         }
+       
 </script>
 @endsection
