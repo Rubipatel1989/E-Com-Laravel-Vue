@@ -188,6 +188,41 @@
                                                         </div>
                                                 </div>
                                                 <input type="hidden" name="id" id="enter_id">
+                                                <div id="product_attrs_container">
+                                                        <div class="product-attr-row">
+                                                                <select name="product_attrs[0][color_id]">
+                                                                        <option value="">Select Color</option>
+                                                                        @foreach ($colors as $color)
+                                                                        <option value="{{ $color->id }}">{{ $color->text }}</option>
+                                                                        @endforeach
+                                                                </select>
+
+                                                                <select name="product_attrs[0][size_id]">
+                                                                        <option value="">Select Size</option>
+                                                                        @foreach ($sizes as $size)
+                                                                        <option value="{{ $size->id }}">{{ $size->text }}</option>
+                                                                        @endforeach
+                                                                </select>
+
+                                                                <input type="text" name="product_attrs[0][sku]" placeholder="SKU" />
+                                                                <input type="number" name="product_attrs[0][mrp]" placeholder="MRP" />
+                                                                <input type="number" name="product_attrs[0][price]" placeholder="Price" />
+                                                                <input type="number" name="product_attrs[0][qty]" placeholder="Quantity" />
+                                                                <input type="text" name="product_attrs[0][length]" placeholder="Length" />
+                                                                <input type="text" name="product_attrs[0][breadth]" placeholder="Breadth" />
+                                                                <input type="text" name="product_attrs[0][height]" placeholder="Height" />
+                                                                <input type="text" name="product_attrs[0][weight]" placeholder="Weight" />
+
+                                                                <button type="button" onclick="removeProductAttr(this)">Remove</button>
+
+                                                                <div id="product_attr_images_container_0">
+                                                                        <input type="file" name="product_attrs[0][images][]" />
+                                                                        <button type="button" onclick="addMoreProductAttrImages(0)">Add More Images</button>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                                <button type="button" onclick="addMoreProductAttrs()">Add More</button>
+
                                         </div>
                                 </div>
                                 <div class="modal-footer">
@@ -296,5 +331,62 @@
                         loadCategoryAttributes($(this).val());
                 });
         });
+</script>
+<script>
+        let attrIndex = 1;
+
+        function addMoreProductAttrs() {
+                let newAttrRow = `
+    <div class="product-attr-row" id="product_attr_row_${attrIndex}">
+        <select name="product_attrs[${attrIndex}][color_id]">
+            <option value="">Select Color</option>
+            @foreach ($colors as $color)
+                <option value="{{ $color->id }}">{{ $color->text }}</option>
+            @endforeach
+        </select>
+
+        <select name="product_attrs[${attrIndex}][size_id]">
+            <option value="">Select Size</option>
+            @foreach ($sizes as $size)
+                <option value="{{ $size->id }}">{{ $size->text }}</option>
+            @endforeach
+        </select>
+
+        <input type="text" name="product_attrs[${attrIndex}][sku]" placeholder="SKU" />
+        <input type="number" name="product_attrs[${attrIndex}][mrp]" placeholder="MRP" />
+        <input type="number" name="product_attrs[${attrIndex}][price]" placeholder="Price" />
+        <input type="number" name="product_attrs[${attrIndex}][qty]" placeholder="Quantity" />
+        <input type="text" name="product_attrs[${attrIndex}][length]" placeholder="Length" />
+        <input type="text" name="product_attrs[${attrIndex}][breadth]" placeholder="Breadth" />
+        <input type="text" name="product_attrs[${attrIndex}][height]" placeholder="Height" />
+        <input type="text" name="product_attrs[${attrIndex}][weight]" placeholder="Weight" />
+
+        <button type="button" onclick="removeProductAttr(this)">Remove</button>
+        
+        <!-- Images Section for the current attribute -->
+        <div id="product_attr_images_container_${attrIndex}">
+            <input type="file" name="product_attrs[${attrIndex}][images][]" />
+            <button type="button" onclick="addMoreProductAttrImages(${attrIndex})">Add More Images</button>
+        </div>
+    </div>`;
+
+                document.getElementById('product_attrs_container').insertAdjacentHTML('beforeend', newAttrRow);
+                attrIndex++;
+        }
+
+        function addMoreProductAttrImages(attrIndex) {
+                let newImageInput = `<div class="product-attr-image"><input type="file" name="product_attrs[${attrIndex}][images][]" />
+    <button type="button" onclick="removeImageInput(this)">Remove</button></div>`;
+
+                document.getElementById(`product_attr_images_container_${attrIndex}`).insertAdjacentHTML('beforeend', newImageInput);
+        }
+
+        function removeImageInput(button) {
+                button.closest('.product-attr-image').remove();
+        }
+
+        function removeProductAttr(button) {
+                button.closest('.product-attr-row').remove();
+        }
 </script>
 @endsection

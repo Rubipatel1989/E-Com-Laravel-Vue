@@ -49,7 +49,6 @@ Route::post('/updateTax', [TaxController::class, 'store']);
 Route::get('/manage_product', [ProductController::class, 'index']);
 Route::get('/product/category-attributes/{categoryId}', [ProductController::class, 'getCategoryAttributes']);
 Route::get('/product/get-product-attributes/{productId}', [ProductController::class, 'getProductAttributes']);
-
 Route::post('/updateProduct', [ProductController::class, 'store']);
 
 ### Delete using common function
