@@ -237,7 +237,12 @@
         </div>
 </div>
 <script>
+        let colors = @json($colors);
+        let sizes = @json($sizes);
+</script>
+<script>
         function saveData(id, name, slug, image, item_code, keywords, description, category_id, brand_id, tax_id) {
+                // Set form field values
                 $('#enter_id').val(id);
                 $('#name').val(name);
                 $('#slug').val(slug);
@@ -248,18 +253,90 @@
                 $('#brand_id').val(brand_id);
                 $('#tax_id').val(tax_id);
 
-                if (image == '') {
+                // Handle image preview
+                if (image === '') {
                         var key_image = "{{ URL::asset('images/upload.png') }}";
                 } else {
-                        var key_image = "{{ URL::asset('') }}" + image + " ";
+                        var key_image = "{{ URL::asset('') }}" + image;
                         $('#photo').removeAttr('required');
                 }
-
                 var html = '<img src="' + key_image + '" id="imgPreview" style="height: 200px; width:200px;">';
                 $('#image_key').html(html);
 
                 // Load and select category attributes for editing
                 loadCategoryAttributes(category_id, id);
+
+                // Fetch product attributes and images for editing
+                if (id > 0) {
+                        $.ajax({
+                                url: `/admin/product/get-product-attributes/${id}`,
+                                method: 'GET',
+                                success: function(response) {
+                                        let productAttrs = response.data.product_attrs;
+                                        $('#product_attrs_container').html(''); // Clear the container
+
+                                        // Loop through product attributes and populate them
+                                        productAttrs.forEach(function(attr, index) {
+                                                let colorOptions = '';
+                                                let sizeOptions = '';
+
+                                                // Populate color dropdown
+                                                colors.forEach(function(color) {
+                                                        colorOptions += `<option value="${color.id}" ${attr.color_id == color.id ? 'selected' : ''}>${color.text}</option>`;
+                                                });
+
+                                                // Populate size dropdown
+                                                sizes.forEach(function(size) {
+                                                        sizeOptions += `<option value="${size.id}" ${attr.size_id == size.id ? 'selected' : ''}>${size.text}</option>`;
+                                                });
+
+                                                // Construct product attributes row with images section
+                                                let newAttrRow = `
+                        <div class="product-attr-row" id="product_attr_row_${index}">
+                            <select name="product_attrs[${index}][color_id]" class="form-control">
+                                <option value="">Select Color</option>
+                                ${colorOptions}
+                            </select>
+
+                            <select name="product_attrs[${index}][size_id]" class="form-control">
+                                <option value="">Select Size</option>
+                                ${sizeOptions}
+                            </select>
+
+                            <input type="text" name="product_attrs[${index}][sku]" value="${attr.sku}" placeholder="SKU" class="form-control" />
+                            <input type="number" name="product_attrs[${index}][mrp]" value="${attr.mrp}" placeholder="MRP" class="form-control" />
+                            <input type="number" name="product_attrs[${index}][price]" value="${attr.price}" placeholder="Price" class="form-control" />
+                            <input type="number" name="product_attrs[${index}][qty]" value="${attr.qty}" placeholder="Quantity" class="form-control" />
+                            <input type="text" name="product_attrs[${index}][length]" value="${attr.length}" placeholder="Length" class="form-control" />
+                            <input type="text" name="product_attrs[${index}][breadth]" value="${attr.breadth}" placeholder="Breadth" class="form-control" />
+                            <input type="text" name="product_attrs[${index}][height]" value="${attr.height}" placeholder="Height" class="form-control" />
+                            <input type="text" name="product_attrs[${index}][weight]" value="${attr.weight}" placeholder="Weight" class="form-control" />
+
+                            <button type="button" class="btn btn-danger" onclick="removeProductAttr(this)">Remove</button>
+
+                            <!-- Images Section for the current attribute -->
+                            <div id="product_attr_images_container_${index}">`;
+
+                                                // Loop through and load images for the current product attribute
+                                                attr.images.forEach(function(image, imgIndex) {
+                                                        newAttrRow += `
+                            <div class="product-attr-image">
+                                <input type="file" name="product_attrs[${index}][images][]" class="form-control" />
+                                <img src="{{ URL::asset('') }}${image.image}" style="height: 50px; width: 50px;" />
+                                <button type="button" class="btn btn-danger" onclick="removeImageInput(this)">Remove</button>
+                            </div>`;
+                                                });
+
+                                                newAttrRow += `
+                                <button type="button" class="btn btn-success" onclick="addMoreProductAttrImages(${index})">Add More Images</button>
+                            </div>
+                        </div>`;
+
+                                                $('#product_attrs_container').append(newAttrRow); // Add the row to the container
+                                        });
+                                }
+                        });
+                }
         }
 
 

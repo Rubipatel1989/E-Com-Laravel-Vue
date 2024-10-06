@@ -37,9 +37,17 @@ class ProductController extends Controller
 
     public function getProductAttributes($productId)
     {
+        $productAttrs = ProductAttr::with('images')->where('product_id', $productId)->get();
+
         $attributeValues = ProductAttribute::where('product_id', $productId)->pluck('attribute_value_id');
-        return $this->success(['reload' => false, 'attribute_values' => $attributeValues], 'Product Attributes Successfully Fetched.');
+
+        return $this->success([
+            'reload' => false,
+            'attribute_values' => $attributeValues,
+            'product_attrs' => $productAttrs
+        ], 'Product Attributes Successfully Fetched.');
     }
+
     public function index()
     {
         $data = Product::with('category', 'brand', 'tax')->get();
