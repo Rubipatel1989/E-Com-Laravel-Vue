@@ -68,3 +68,8 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ## Youtube Link 10:00
 https://www.youtube.com/watch?v=XiwBcSf-Mp0&list=PL7osxfy1esdjTVR3GqWzP0EB_6mQmCX-a&index=32
 https://www.youtube.com/watch?v=LWg_iLH8wNQ&list=PL7osxfy1esdjTVR3GqWzP0EB_6mQmCX-a&index=39
+
+
+
+## GraphQL after installation run below commond
+php artisan vendor:publish --provider="Rebing\GraphQL\GraphQLServiceProvider"

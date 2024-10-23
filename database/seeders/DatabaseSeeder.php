@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Post;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,11 +12,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        // Seed the 'posts' table with 10 posts
+        Post::factory(100)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
+        // You can also create a specific post with predefined data like this:
+        // Post::factory()->create([
+        //     'title' => 'Specific Post Title',
+        //     'content' => 'This is the content of the specific post.',
+        //     'author' => 'John Doe',
         // ]);
     }
 }
