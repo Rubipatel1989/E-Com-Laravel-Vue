@@ -29,6 +29,11 @@ class PostQueries extends Query
                             'type' => Type::int(),
                             'description' => 'ID of the post',
                      ],
+                     'title' => [
+                            'name' => 'title',
+                            'type' => Type::string(),
+                            'description' => 'Title of the post',
+                     ],
                      'author' => [
                             'name' => 'author',
                             'type' => Type::string(),
@@ -42,6 +47,11 @@ class PostQueries extends Query
               // If an ID is passed, fetch the post with that ID
               if (isset($args['id'])) {
                      return Post::where('id', $args['id'])->get();
+              }
+
+              // If a title is passed, fetch posts by that title (case-insensitive)
+              if (isset($args['title'])) {
+                     return Post::where('title', 'LIKE', '%' . $args['title'] . '%')->get();
               }
 
               // If an author is passed, fetch posts by that author (case-insensitive)
