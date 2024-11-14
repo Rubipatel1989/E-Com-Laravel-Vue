@@ -112,6 +112,40 @@
 
 
         }
+        function sendMail(email) {
+                var text = 'Are you sure for send mail ?';
+                if (confirm(text) == true) {
+                        $.ajax({
+                                type: 'GET',
+                                url: "{{ url('admin/sendMail') }}/" + email,
+                                data: '',
+                                cache: false,
+                                contentType: false,
+                                processData: false,
+                                success: function(result) {
+                                    alert('Otp Send Successfully')
+                                        if (result.status == 'Success') {
+                                                showAlert(result.status, result.message);
+
+                                                if (result.data.reload != 'undefined') {
+                                                        window.location.reload();
+                                                }
+                                        } else {
+                                                showAlert(result.status, result.message);
+
+                                        }
+
+                                },
+                                error: function(result) {
+                                        showAlert(result.responseJSON.status, result.responseJSON.message);
+                                }
+
+                        });
+                }
+
+
+
+        }
 
 </script>
 <script>

@@ -73,3 +73,13 @@ https://www.youtube.com/watch?v=LWg_iLH8wNQ&list=PL7osxfy1esdjTVR3GqWzP0EB_6mQmC
 
 ## GraphQL after installation run below commond
 php artisan vendor:publish --provider="Rebing\GraphQL\GraphQLServiceProvider"
+
+
+## Mail Working. in DashboardController
+
+## Database setup
+1. create database "laravel_test_ecom"
+2. import laravel_test_ecom.sql file
+3. Login credentials
+4. username = pawan.k@exeire.com
+5. password - Bsa@123456

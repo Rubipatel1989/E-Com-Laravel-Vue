@@ -53,3 +53,5 @@ Route::post('/updateProduct', [ProductController::class, 'store']);
 
 ### Delete using common function
 Route::get('/deleteData/{id?}/{table?}', [DashboardController::class, 'deleteData']);
+### Send Mail using common function
+Route::get('/sendMail/{id?}', [DashboardController::class, 'sendMail']);

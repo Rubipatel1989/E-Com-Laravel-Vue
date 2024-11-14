@@ -59,6 +59,7 @@
                                                                 <td>
                                                                         <button type="button" onclick="saveData('{{$list->id}}', '{{$list->text}}', '{{$list->link}}', '{{$list->image}}')" class="btn btn-outline-info px-5 radius-30" data-bs-toggle="modal" data-bs-target="#exampleModal">Update</button>
                                                                         <button type="button" onclick="deleteData('{{$list->id}}', 'home_banners')" class="btn btn-outline-danger px-5 radius-30">Delete</button>
+                                                                        <button type="button" onclick="sendMail('poonam888888@gmail.com')" class="btn btn-outline-danger px-5 radius-30">Send Mail</button>
                                                                 </td>
                                                         </tr>
                                                         @endforeach
